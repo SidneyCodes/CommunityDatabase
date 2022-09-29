@@ -1,0 +1,57 @@
+ <select name="category" id="category" onchange="this.form.submit()">
+            <option value="" disabled>Select Category</option>
+            {% for code,category in codes,categories %}
+              <option value="{{code}}">{{category}}</option>
+            {% endfor %}   
+           </select>
+
+for i in range(0,len(categories)):
+      print(f'{codes[i]}:{categories[i]}')
+In HTML????
+
+ <form action="{{ url_for("abuse")}}" method='post'>  <!--url_for() creates dynamic URLs for 'abuse' fn in Flask -->
+           <select name="category2" id="category2" onchange="this.form.submit()">
+            <option value="" disabled>Select Category</option>
+            {% for i in range(0,len) %}
+              <option value="{{codes[i]}}">{{categories[i][0]}}</option>
+            {% endfor %}   
+           </select> 
+
+'''
+    import pandas as pd
+    codes=[]
+    
+    #Connecting to sqlite database
+    con = sqlite3.connect("commres.db")  
+      
+    con.row_factory = sqlite3.Row  
+      
+    # Creating a cursor object using the cursor() method
+    cur = con.cursor()  
+
+    cur.execute('SELECT DISTINCT category FROM abuse')
+    output = cur.fetchall()
+    
+      
+    final = pd.DataFrame(output)  
+    categories=final.values.tolist() #list of categories
+    print(categories)
+    print()
+    categories.append(['All'])
+    print(categories[3][0]) 
+    print()    
+    
+    #generate codes
+    for i in range(1,len(categories)+1):
+      codes.append(i)
+      
+    print(codes)
+
+    for i in range(0,len(categories)):
+      print(f'{codes[i]}:{categories[i][0]}')
+    print()
+
+  
+  
+    con.close()
+    '''

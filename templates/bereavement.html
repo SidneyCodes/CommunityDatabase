@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<!--
+	Minimaxing by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Community Services Database</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="/" id="logo">Community Services Database</a></h1>
+									<!--
+                  <nav id="nav">
+                    <a href="/">Homepage</a>
+										<a href="twocolumn1.html">Two Column #1</a>
+										<a href="twocolumn2.html">Two Column #2</a>
+										<a href="onecolumn.html" class="current-page-item">One Column</a>
+										<a href="threecolumn.html">Three Column</a>
+									</nav>
+                  -->
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-12">
+
+								<section>
+									<h2>Community Programs</h2>
+
+          <!--Dropdown menu -->
+         <label for="category">Category</label>
+           <form action="{{ url_for("bereavement")}}" method='post'>  <!--url_for() creates dynamic URLs for 'bereavement' fn in Flask -->
+          <select name="category" id="category" onchange="this.form.submit()">
+            <option value="">Select Category</option>
+            <option value="all">All</option>
+            <option value="deuil">BEREAVEMENT / Deuil</option>
+            
+          </select>
+
+          
+            
+           
+          
+          <br>
+          <br>   
+
+                  
+          <!--Searchbar -->
+          <!--  
+          <div class="search-container">
+            <form action="{{ url_for("abuse")}}" method='post'> 
+              <input type="text" placeholder="Search.." name="search">
+             <button type="submit" style='background-color: #008dab; color: #fff;'>Submit</button>
+            </form>
+          </div>
+              -->
+                  
+          <style>
+          table, th, td {
+            border: 0px solid black;
+          }
+         
+          table {
+            border-spacing: 10px;
+          }
+         
+          </style>
+
+        <div style="overflow-x:auto;"> <!--Adds horizontal scrollbar for table -->
+         <table style="width:90%">
+          <!-- Brings column headings from SQL database -->
+          <thead style="font-size: 1.4rem">
+          {% for col in cols %}
+              <td>{{col[0]}}</td>
+          {% endfor %}  
+          </thead> 
+
+           <!-- Shows data row by row for each column 
+           Same basic design can be used for any SQL table 
+           no matter the column names or the no. of columns -->
+          {% for row in rows %}  
+       
+          <tr>  
+              {% for col in cols %}
+              <td>{{row[col[0]]}}</td>  
+               {% endfor %}  
+          </tr>  
+       
+          {% endfor %}  
+          </table>  
+        </div>
+             
+								</section>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+            
+		
+
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/browser.min.js"></script>
+			<script src="static/assets/js/breakpoints.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<script src="static/assets/js/main.js"></script>
+
+	</body>
+</html>
