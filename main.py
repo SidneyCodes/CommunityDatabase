@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask('app')
 
-#Accessing SQLite database
+# Accessing SQLite database
 import openpyxl
 import sqlite3
 import os
