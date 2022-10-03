@@ -10,7 +10,7 @@
    3) Type 'git clone https://github.com/SidneyCodes/CommunityDatabase.git'
    4) Now you can see the project has been cloned successfully to that directory.
 4) Before working on the project we should make a virtual environment first. 
-   Type 'pip install -m venv venv' 
+   Type 'python install -m venv venv' 
    This command will create a virtual environment for your project. 
 5) Activate the virtual environment.
    Type 'venv\Scripts\activate' for WINDOWS OS
