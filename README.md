@@ -1,4 +1,5 @@
 ## Community Database
+
 # Getting Started
 1) Download & Install 'git' on your local computer. 'https://git-scm.com/downloads'
 2) Download & Install 'python' on your local computer. 'https://www.python.org/downloads/'
