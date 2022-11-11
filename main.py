@@ -1,42 +1,43 @@
+# Framework imports
 from flask import Flask, render_template, request
+
+# Python imports
+import sqlite3
+import os
+from typeO import type_o
+from typeN import type_n
+from lgbt import lgbt
+from pregnancy import pregnancy
 
 app = Flask('app')
 
 # Accessing SQLite database
-import openpyxl
-import sqlite3
-import os
-from typeO import typeO
-from typeN import typeN
-from lgbt import lgbt
-from pregnancy import pregnancy
 
-#checks whether the db file exists & returns True or False
+# Checks whether the db file exists & returns True or False
 f = os.path.isfile('commres.db')
 
-# if f returns False(i.e. DB file doesnt exist) then functions are
-# called to retrieve excel sheets and copy them to SQLite database
+# if f returns False(i.e. DB file doesn't exist) then functions are
+# called to retrieve Excel sheets and copy them to SQLite database
 
-if f == False:
+if not f:
     print('Copying Excel data to SQLite database')
 
     lgbt('LGBTQ2S+')
     pregnancy('Pregnancy')
 
-    osheets = ['Addictions','AIDS Hepatitis C','Bereavement', \
-               'Anger Management','Black Lives','Brain InjuryTumour',\
-               'Clothing Donations', 'Community Programs', 'Disability',\
-               'Education','Emergency Services','Employment Services',\
-               'Family Services','Financial','Government',\
-               'Healthcare','Housing','Legal Assistance',\
-               'Newcomers','Older Adults','Transportation' \
-              ]
-    [typeO(osheet) for osheet in osheets]
+    osheets = ['Addictions', 'AIDS Hepatitis C', 'Bereavement',
+               'Anger Management', 'Black Lives', 'Brain InjuryTumour',
+               'Clothing Donations', 'Community Programs', 'Disability',
+               'Education', 'Emergency Services', 'Employment Services',
+               'Family Services', 'Financial', 'Government',
+               'Healthcare', 'Housing', 'Legal Assistance',
+               'Newcomers', 'Older Adults', 'Transportation'
+               ]
+    [type_o(osheet) for osheet in osheets]
 
-    nsheets = ['Francophones','Food Banks','Abuse','Homelessness','Indigenous People',\
-               'Mental Health','Youth' \
-              ]
-    [typeN(nsheet) for nsheet in nsheets]
+    nsheets = ['Francophones', 'Food Banks', 'Abuse', 'Homelessness', 'Indigenous People',
+               'Mental Health', 'Youth']
+    [type_n(nsheet) for nsheet in nsheets]
 
     print('Data processing complete')
 
@@ -48,10 +49,8 @@ def index():
 
 @app.route('/abuse', methods=["GET", "POST"])
 def abuse():
-    category = ''
-    #search = ''
 
-    #Connecting to sqlite database
+    # Connecting to sqlite database
     con = sqlite3.connect("commres.db")
 
     con.row_factory = sqlite3.Row
@@ -62,24 +61,21 @@ def abuse():
     data = cur.execute('SELECT * FROM abuse')
 
     cols = data.description
-    #for col in cols:
-    # print(col[0])
-    print()
 
     rows = cur.fetchall()
     con.close()
 
-    #if requesting method is post, which is the method
-    #specified in each form
-    #we get the input data from these HTML forms
+    # If requesting method is post, which is the method
+    # Specified in each form
+    # We get the input data from these HTML forms
     if request.method == "POST":
         category = request.form["category"]
         print(category)
 
-        #search = request.form.get("search")
-        #print(search)
+        # search = request.form.get("search")
+        # print(search)
 
-        #Connecting to sqlite database
+        # Connecting to sqlite database
         con = sqlite3.connect("commres.db")
 
         con.row_factory = sqlite3.Row
@@ -87,7 +83,7 @@ def abuse():
         # Creating a cursor object using the cursor() method
         cur = con.cursor()
 
-        #If the user selects the category 'all' in the webpage, the first statement will be executed
+        # If the user selects the category 'all' in the webpage, the first statement will be executed
         if category == 'all':
             data = cur.execute(f'SELECT * FROM abuse')
         else:
@@ -103,10 +99,8 @@ def abuse():
 
 @app.route('/addictions', methods=["GET", "POST"])
 def addictions():
-    category = ''
-    #search = ''
 
-    #Connecting to sqlite database
+    # Connecting to sqlite database
     con = sqlite3.connect("commres.db")
 
     con.row_factory = sqlite3.Row
@@ -117,24 +111,21 @@ def addictions():
     data = cur.execute('SELECT * FROM addictions')
 
     cols = data.description
-    #for col in cols:
-    # print(col[0])
-    print()
 
     rows = cur.fetchall()
     con.close()
 
-    #if requesting method is post, which is the method
-    #specified in each form
-    #we get the input data from these HTML forms
+    # If requesting method is post, which is the method
+    # Specified in each form
+    # We get the input data from these HTML forms
     if request.method == "POST":
         category = request.form["category"]
         print(category)
 
-        #search = request.form.get("search")
-        #print(search)
+        # search = request.form.get("search")
+        # print(search)
 
-        #Connecting to sqlite database
+        # Connecting to sqlite database
         con = sqlite3.connect("commres.db")
 
         con.row_factory = sqlite3.Row
@@ -142,7 +133,7 @@ def addictions():
         # Creating a cursor object using the cursor() method
         cur = con.cursor()
 
-        #If the user selects the category 'all' in the webpage, the first statement will be executed
+        # If the user selects the category 'all' in the webpage, the first statement will be executed
         if category == 'all':
             data = cur.execute(f'SELECT * FROM addictions')
         else:
@@ -155,12 +146,11 @@ def addictions():
 
     return render_template("addictions.html", rows=rows, cols=cols)
 
+
 @app.route('/aids_hep_c', methods=["GET", "POST"])
 def aids_hep_c():
-    category = ''
-    #search = ''
 
-    #Connecting to sqlite database
+    # Connecting to sqlite database
     con = sqlite3.connect("commres.db")
 
     con.row_factory = sqlite3.Row
@@ -171,24 +161,21 @@ def aids_hep_c():
     data = cur.execute('SELECT * FROM aids_hepatitis_c')
 
     cols = data.description
-    #for col in cols:
-    # print(col[0])
-    print()
 
     rows = cur.fetchall()
     con.close()
 
-    #if requesting method is post, which is the method
-    #specified in each form
-    #we get the input data from these HTML forms
+    # If requesting method is post, which is the method
+    # Specified in each form
+    # We get the input data from these HTML forms
     if request.method == "POST":
         category = request.form["category"]
         print(category)
 
-        #search = request.form.get("search")
-        #print(search)
+        # search = request.form.get("search")
+        # print(search)
 
-        #Connecting to sqlite database
+        # Connecting to sqlite database
         con = sqlite3.connect("commres.db")
 
         con.row_factory = sqlite3.Row
@@ -196,7 +183,7 @@ def aids_hep_c():
         # Creating a cursor object using the cursor() method
         cur = con.cursor()
 
-        #If the user selects the category 'all' in the webpage, the first statement will be executed
+        # If the user selects the category 'all' in the webpage, the first statement will be executed
         if category == 'all':
             data = cur.execute(f'SELECT * FROM aids_hepatitis_c')
         else:
@@ -209,12 +196,11 @@ def aids_hep_c():
 
     return render_template("aids_hep_c.html", rows=rows, cols=cols)
 
+
 @app.route('/bereavement', methods=["GET", "POST"])
 def bereavement():
-    category = ''
-    #search = ''
 
-    #Connecting to sqlite database
+    # Connecting to sqlite database
     con = sqlite3.connect("commres.db")
 
     con.row_factory = sqlite3.Row
@@ -225,24 +211,21 @@ def bereavement():
     data = cur.execute('SELECT * FROM bereavement')
 
     cols = data.description
-    #for col in cols:
-    # print(col[0])
-    print()
 
     rows = cur.fetchall()
     con.close()
 
-    #if requesting method is post, which is the method
-    #specified in each form
-    #we get the input data from these HTML forms
+    # If requesting method is post, which is the method
+    # Specified in each form
+    # We get the input data from these HTML forms
     if request.method == "POST":
         category = request.form["category"]
         print(category)
 
-        #search = request.form.get("search")
-        #print(search)
+        # search = request.form.get("search")
+        # print(search)
 
-        #Connecting to sqlite database
+        # Connecting to sqlite database
         con = sqlite3.connect("commres.db")
 
         con.row_factory = sqlite3.Row
@@ -250,7 +233,7 @@ def bereavement():
         # Creating a cursor object using the cursor() method
         cur = con.cursor()
 
-        #If the user selects the category 'all' in the webpage, the first statement will be executed
+        # If the user selects the category 'all' in the webpage, the first statement will be executed
         if category == 'all':
             data = cur.execute(f'SELECT * FROM bereavement')
         else:
@@ -263,12 +246,11 @@ def bereavement():
 
     return render_template("bereavement.html", rows=rows, cols=cols)
 
+
 @app.route('/community_programs', methods=["GET", "POST"])
 def community_programs():
-    category = ''
-    #search = ''
 
-    #Connecting to sqlite database
+    # Connecting to sqlite database
     con = sqlite3.connect("commres.db")
 
     con.row_factory = sqlite3.Row
@@ -279,24 +261,21 @@ def community_programs():
     data = cur.execute('SELECT * FROM community_programs')
 
     cols = data.description
-    #for col in cols:
-    # print(col[0])
-    print()
 
     rows = cur.fetchall()
     con.close()
 
-    #if requesting method is post, which is the method
-    #specified in each form
-    #we get the input data from these HTML forms
+    # If requesting method is post, which is the method
+    # Specified in each form
+    # We get the input data from these HTML forms
     if request.method == "POST":
         category = request.form["category"]
         print(category)
 
-        #search = request.form.get("search")
-        #print(search)
+        # search = request.form.get("search")
+        # print(search)
 
-        #Connecting to sqlite database
+        # Connecting to sqlite database
         con = sqlite3.connect("commres.db")
 
         con.row_factory = sqlite3.Row
@@ -304,7 +283,7 @@ def community_programs():
         # Creating a cursor object using the cursor() method
         cur = con.cursor()
 
-        #If the user selects the category 'all' in the webpage, the first statement will be executed
+        # If the user selects the category 'all' in the webpage, the first statement will be executed
         if category == 'all':
             data = cur.execute(f'SELECT * FROM community_programs')
         else:
